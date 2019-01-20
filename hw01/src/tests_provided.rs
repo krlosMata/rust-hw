@@ -1,6 +1,7 @@
 #![cfg(test)]
+
 use problem1::{sum, dedup, filter};
-use problem2::mat_mult;
+//use problem2::mat_mult;
 //use problem3::sieve;
 //use problem4::{hanoi, Peg};
 
@@ -35,7 +36,7 @@ fn test_filter_small() {
     let vs = vec![1,2,3,4,5];
     assert_eq!(filter(&vs, &even_predicate), vec![2,4]);
 }
-
+/*
 //
 // Problem 2
 //
@@ -54,7 +55,7 @@ fn test_mat_mult_identity() {
         }
     }
 }
-/*
+
 //
 // Problem 3
 //
