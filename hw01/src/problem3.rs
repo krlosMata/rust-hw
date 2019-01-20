@@ -6,8 +6,7 @@ pub fn sieve(n: u32) -> Vec<u32> {
     // Loops from 2 to n
     for i in 2..n {
       if help_vec[i as usize] == 0 {
-        if i.pow(2) > 20 {
-          help_vec[i as usize] = 1;
+        if i.pow(2) < 20 {
           let mut mult = 2*i;
           while mult < n {
             help_vec[mult as usize] = 1;
@@ -18,6 +17,9 @@ pub fn sieve(n: u32) -> Vec<u32> {
         }
       }
     }
+  for x in &help_vec {
+    println!("{}", x);
+  }
   for i in 2..n {
     if help_vec[i as usize] == 0 {
       final_vec.push(i);    
