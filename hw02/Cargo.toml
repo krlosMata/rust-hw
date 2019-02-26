@@ -2,6 +2,9 @@
 name = "hw02"
 version = "0.1.0"
 authors = ["krlosMata <krlosmata@gmail.com>"]
-edition = "2018"
 
 [dependencies]
+clippy = { version = "*", optional = true }
+
+[features]
+default = []
