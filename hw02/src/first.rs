@@ -53,21 +53,36 @@ impl Link {
     }
 
     fn insert(&mut self, value: i32) -> bool {
-        match self {
-            &mut Link::Empty => {
-                *self = Link::new(value);
-                true
-            }
-            &mut Link::More(ref mut node) => {
-                if value < node.value {
-                    node.left.insert(value)
-                } else if value == node.value {
-                    false
-                } else {
-                    node.right.insert(value)
-                }
+      match self {
+        &mut Link::Empty => {
+          *self = Link::new(value);
+          true
+        }
+        &mut Link::More(ref mut node) => {
+            if value < node.value {
+              node.left.insert(value)
+            } else if value == node.value {
+              false
+            } else {
+              node.right.insert(value)
             }
         }
+      }
+    }
+
+    fn search(&self, value: i32) -> bool {
+      match self {
+        &Link::Empty => return false,
+        &Link::More(ref node) => {
+          if value < node.value {
+            node.left.search(value)
+          } else if node.value == value {
+            true
+          } else {
+            node.right.search(value)
+          }
+        }
+      }
     }
 }
 
@@ -82,6 +97,10 @@ impl BST {
     pub fn insert(&mut self, elem: i32) -> bool {
       self.root.insert(elem)
     }
+
+    pub fn search(&self, elem: i32) -> bool {
+      self.root.search(elem)
+    }
 }
 
 /**
@@ -90,9 +109,27 @@ impl BST {
 #[cfg(test)]
 mod test {
     use super::BST;
+    use super::Link;
 
     #[test]
     fn basics() {
+        let bst = BST::new();
+        println!("Start Test Bro");
+        assert!(bst.search(0) == false);
+    }
+
+    #[test]
+    fn add_several() {
         let mut bst = BST::new();
+        assert!(bst.insert(20));
+        assert!(bst.insert(5));
+        assert!(bst.insert(11));
+        assert!(bst.insert(3));
+        assert!(bst.insert(78));
+
+        assert!(bst.search(78));
+        assert!(bst.search(77) == false);
+
+        println!("{:#?}", bst);
     }
 }
